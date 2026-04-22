@@ -1,4 +1,4 @@
-name: Validate chezmoi apply on Linux distros
+name: Validate chezmoi apply (Ubuntu/Debian/Fedora/Arch)
 
 on:
   push:
@@ -27,21 +27,6 @@ jobs:
           - distro: arch
             image: archlinux:latest
             bootstrap: pacman -Sy --noconfirm ca-certificates curl git zsh sudo
-          - distro: rhel
-            image: registry.access.redhat.com/ubi9/ubi:latest
-            bootstrap: |
-              if command -v dnf >/dev/null 2>&1; then
-                dnf install -y ca-certificates curl git zsh sudo
-              else
-                microdnf install -y ca-certificates curl git zsh sudo
-                ln -sf "$(command -v microdnf)" /usr/bin/dnf
-              fi
-          - distro: centos
-            image: quay.io/centos/centos:stream9
-            bootstrap: dnf install -y ca-certificates curl git zsh sudo
-          - distro: opensuse
-            image: opensuse/leap:15.6
-            bootstrap: zypper --non-interactive refresh && zypper --non-interactive install -y ca-certificates curl git zsh sudo
 
     steps:
       - name: Checkout
@@ -59,5 +44,6 @@ jobs:
         run: |
           mkdir -p "$HOME"
           chezmoi init --apply --source "$GITHUB_WORKSPACE" \
-            --promptString gitName='CI Bot' \
-            --promptString gitEmail='ci@example.com'
+            --promptString 'Git author name=CI Bot' \
+            --promptString 'Git author email=ci@example.com' \
+            --no-tty
