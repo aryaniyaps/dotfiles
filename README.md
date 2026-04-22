@@ -1,6 +1,6 @@
 # Aryan Iyappan's dotfiles
 
-<p align="center">
+<p align="left">
   <img src=".github/banner.png" alt="Dottler dotfiles banner"  height="360" />
 </p>
 
