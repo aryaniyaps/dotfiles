@@ -22,11 +22,8 @@ case "${ID:-}" in
   arch)
     manager="pacman"
     ;;
-  fedora|rhel|centos)
+  fedora)
     manager="dnf"
-    ;;
-  opensuse*|sles|sled)
-    manager="zypper"
     ;;
 esac
 
@@ -41,12 +38,8 @@ if [[ -z "$manager" && -n "${ID_LIKE:-}" ]]; then
         manager="pacman"
         break
         ;;
-      fedora|rhel)
+      fedora)
         manager="dnf"
-        break
-        ;;
-      suse)
-        manager="zypper"
         break
         ;;
     esac
@@ -96,11 +89,6 @@ case "$manager" in
     elif sudo dnf install -y moby-engine docker-compose; then
       install_ok=1
     elif sudo dnf install -y moby-engine docker-compose-plugin; then
-      install_ok=1
-    fi
-    ;;
-  zypper)
-    if sudo zypper --non-interactive install docker docker-compose; then
       install_ok=1
     fi
     ;;

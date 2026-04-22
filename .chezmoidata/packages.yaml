@@ -17,9 +17,3 @@ linux:
     - curl
     - tmux
     - golang
-  zypper:
-    - git
-    - zsh
-    - curl
-    - tmux
-    - go

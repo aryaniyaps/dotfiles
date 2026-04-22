@@ -15,8 +15,6 @@ This is a fully automated development environment setup managed by [chezmoi](htt
 | Debian | `apt` | ✅ Tested |
 | Fedora | `dnf` | ✅ Tested |
 | Arch Linux | `pacman` | ✅ Tested |
-| RHEL family | `dnf` | 🟡 Supported (not yet tested) |
-| openSUSE / SLES | `zypper` | 🟡 Supported (not yet tested) |
 
 ## Quickstart
 
@@ -46,8 +44,7 @@ Installed by `run_once_before_00_install_packages.sh.tmpl`:
 
 - **apt/debian/ubuntu**: `git`, `zsh`, `curl`, `tmux`, `golang-go`
 - **pacman/arch**: `git`, `zsh`, `curl`, `tmux`, `go`
-- **dnf/fedora/rhel**: `git`, `zsh`, `curl`, `tmux`, `golang`
-- **zypper/opensuse/sles**: `git`, `zsh`, `curl`, `tmux`, `go`
+- **dnf/fedora**: `git`, `zsh`, `curl`, `tmux`, `golang`
 
 ### Installed tooling (bootstrap scripts)
 - **Oh My Zsh**

@@ -22,11 +22,8 @@ case "${ID:-}" in
   arch)
     manager="pacman"
     ;;
-  fedora|rhel|centos)
+  fedora)
     manager="dnf"
-    ;;
-  opensuse*|sles|sled)
-    manager="zypper"
     ;;
 esac
 
@@ -41,12 +38,8 @@ if [[ -z "$manager" && -n "${ID_LIKE:-}" ]]; then
         manager="pacman"
         break
         ;;
-      fedora|rhel)
+      fedora)
         manager="dnf"
-        break
-        ;;
-      suse)
-        manager="zypper"
         break
         ;;
     esac
@@ -62,9 +55,6 @@ case "$manager" in
     ;;
   dnf)
     packages=({{ .linux.dnf | join " " }})
-    ;;
-  zypper)
-    packages=({{ .linux.zypper | join " " }})
     ;;
   "")
     echo "No declarative package manager mapping for distro '${ID:-unknown}'. Skipping."
@@ -83,7 +73,7 @@ is_pkg_installed() {
     pacman)
       pacman -Qi "$pkg" >/dev/null 2>&1
       ;;
-    dnf|zypper)
+    dnf)
       rpm -q "$pkg" >/dev/null 2>&1
       ;;
     *)
@@ -115,8 +105,5 @@ case "$manager" in
     ;;
   dnf)
     sudo dnf install -y "${packages[@]}"
-    ;;
-  zypper)
-    sudo zypper --non-interactive install "${packages[@]}"
     ;;
 esac
