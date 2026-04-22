@@ -4,12 +4,12 @@
   <tr>
     <td width="58%" valign="top">
       <picture>
-        <source media="(max-width: 320px)" srcset=".github/banner.png" />
-        <img src=".github/banner.png" alt="Dottler dotfiles banner" style="display:block; width:72%; max-width:320px; height:auto;" />
+        <source media="(max-width: 768px)" srcset=".github/banner.png" />
+        <img src=".github/banner.png" alt="Dottler dotfiles banner" style="display:block; width:100%; height:auto;" />
       </picture>
       <p><sub><em>✨ Dottler guarding the dots</em></sub></p>
     </td>
-    <td width="90%" valign="top">
+    <td width="42%" valign="top">
 
 ### Quickstart
 
