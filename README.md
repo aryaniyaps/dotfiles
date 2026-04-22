@@ -2,7 +2,7 @@
 
 <table>
   <tr>
-    <td width="58%" valign="top">
+    <td width="68%" valign="top">
       <picture>
         <source media="(max-width: 768px)" srcset=".github/banner.png" />
         <img src=".github/banner.png" alt="Dottler dotfiles banner" style="display:block; width:100%; height:auto;" />
