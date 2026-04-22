@@ -1,7 +1,7 @@
 # Aryan Iyappan's dotfiles
 
 <p align="left">
-  <img src=".github/banner.png" alt="Dottler dotfiles banner"  height="360" />
+  <img src=".github/banner.png" alt="Dottler dotfiles banner"  height="260" />
 </p>
 
 ## Quickstart
