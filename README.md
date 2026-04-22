@@ -4,6 +4,7 @@ This is a fully automated development environment setup managed by [chezmoi](htt
 
 <p align="left">
   <img src=".github/banner.png" alt="Dottler dotfiles banner"  height="260" />
+  <p><em>Dotfile wrangler extraordinaire! 🧠📁 Managing your configs like a psychic boss—no more config chaos!</em></p>
 </p>
 
 ## Quickstart
