@@ -1,5 +1,7 @@
 # Aryan Iyappan's dotfiles
 
+This is a fully automated development environment setup managed by [chezmoi](https://github.com/twpayne/chezmoi). It provides a complete shell configuration and tooling setup that can be deployed with a single command on any Linux system.
+
 <p align="left">
   <img src=".github/banner.png" alt="Dottler dotfiles banner"  height="260" />
 </p>
@@ -14,7 +16,6 @@ sh -c "$(curl -fsLS get.chezmoi.io)" -- -b ~/.local/bin init --apply aryaniyaps
 
 Sit back and watch your environment get configured automatically!
 
-This is a fully automated development environment setup managed by [chezmoi](https://github.com/twpayne/chezmoi). It provides a complete shell configuration and tooling setup that can be deployed with a single command on any Linux system.
 
 ### Git identity prompt during `chezmoi init`
 
