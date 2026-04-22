@@ -56,6 +56,38 @@ else
   fail "tmux is not installed"
 fi
 
+if command -v fzf >/dev/null 2>&1; then
+  ok "fzf $(fzf --version | head -n1)"
+else
+  fail "fzf is not installed"
+fi
+
+if command -v zoxide >/dev/null 2>&1; then
+  ok "zoxide $(zoxide --version)"
+else
+  fail "zoxide is not installed"
+fi
+
+if command -v zsh >/dev/null 2>&1; then
+  zsh_path="$(command -v zsh)"
+  login_shell=""
+
+  if command -v getent >/dev/null 2>&1; then
+    login_shell="$(getent passwd "$USER" | cut -d: -f7 || true)"
+  fi
+  if [[ -z "$login_shell" ]]; then
+    login_shell="${SHELL:-}"
+  fi
+
+  if [[ "$login_shell" == "$zsh_path" ]]; then
+    ok "default login shell is zsh ($login_shell)"
+  else
+    echo "[WARN] default login shell is '$login_shell' (expected '$zsh_path')" >&2
+  fi
+else
+  fail "zsh is not installed"
+fi
+
 if command -v docker >/dev/null 2>&1; then
   ok "docker $(docker --version)"
 else

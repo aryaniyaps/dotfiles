@@ -44,9 +44,9 @@ chezmoi update --init --apply
 ### Declarative base packages (per distro)
 Installed by `run_once_before_00_install_packages.sh.tmpl`:
 
-- **apt/debian/ubuntu**: `git`, `zsh`, `curl`, `tmux`, `golang-go`
-- **pacman/arch**: `git`, `zsh`, `curl`, `tmux`, `go`
-- **dnf/fedora**: `git`, `zsh`, `curl`, `tmux`, `golang`
+- **apt/debian/ubuntu**: `git`, `zsh`, `curl`, `tmux`, `fzf`, `zoxide`, `golang-go`
+- **pacman/arch**: `git`, `zsh`, `curl`, `tmux`, `fzf`, `zoxide`, `go`
+- **dnf/fedora**: `git`, `zsh`, `curl`, `tmux`, `fzf`, `zoxide`, `golang`
 
 ### Installed tooling (bootstrap scripts)
 - **Oh My Zsh**
@@ -60,6 +60,7 @@ Installed by `run_once_before_00_install_packages.sh.tmpl`:
 
 ### Shell and editor environment
 - **ZSH** with **Oh My Zsh**
+- Sets **zsh** as the default login shell during installation (interactive sessions)
 - Theme: **robbyrussell**
 - **tmux** configuration (`dot_tmux.conf`, mouse enabled)
 - PATH wiring for `~/.local/bin`, `nvm`, and Go workspace binaries
@@ -70,6 +71,8 @@ Installed by `run_once_before_00_install_packages.sh.tmpl`:
 - Language/tooling: `python`, `pip`, `node`, `npm`, `yarn`, `golang`, `rust`
 - Productivity: `sudo`, `extract`, `z`, `history`, `command-not-found`, `vscode`
 - Community plugins (auto-synced): `zsh-autosuggestions`, `zsh-syntax-highlighting`
+- Completion source (auto-synced): `zsh-completions` (added to `fpath`, not loaded as an Oh My Zsh plugin)
+  - Rationale: avoids redundant `.zcompdump` cache generation from double `compinit` calls, improving shell startup time.
 
 ### Language/runtime config included
 - **Go**: defaults for `$GOPATH` and `$GOBIN`, with `$GOBIN` added to `PATH`
@@ -79,7 +82,7 @@ Installed by `run_once_before_00_install_packages.sh.tmpl`:
 ### Verification included
 `run_once_after_99_verify_tooling.sh` checks:
 - `node`, `npm`, `pnpm`
-- `gh`, `tmux`
+- `gh`, `tmux`, `fzf`
 - `docker` + compose availability
 - `uv` + Python 3.14 availability via `uv`
 - `go` installation plus `go env` + zsh PATH/GOBIN integration

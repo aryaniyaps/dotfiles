@@ -95,6 +95,16 @@ plugins=(
     yarn
     golang
     rust
+    fzf
+{{- if eq .chezmoi.osRelease.id "arch" }}
+    archlinux
+{{- end }}
+{{- if eq .chezmoi.osRelease.id "debian" }}
+    debian
+{{- end }}
+{{- if eq .chezmoi.osRelease.id "ubuntu" }}
+    ubuntu
+{{- end }}
 
     # Productivity Boosters
     sudo              # Press ESC twice to add sudo to previous command
@@ -109,7 +119,32 @@ plugins=(
     zsh-syntax-highlighting  # Must be last
 )
 
-source $ZSH/oh-my-zsh.sh
+# zsh-completions should not be loaded as a standard Oh My Zsh plugin.
+# Add its completion definitions to fpath before sourcing Oh My Zsh.
+fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
+
+# Make tab-completion case-insensitive.
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+# Add colors to ls
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+# disable regular menu
+zstyle ':completion:*' menu no
+# add previews to ls directories
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+
+autoload -U compinit && compinit
+
+source "$ZSH/oh-my-zsh.sh"
+
+# fzf shell integration (keybindings + completion)
+if command -v fzf >/dev/null 2>&1; then
+  eval "$(fzf --zsh)"
+fi
+
+# zoxide smart cd integration
+if command -v zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init --cmd cd zsh)"
+fi
 
 # User configuration
 
@@ -139,6 +174,7 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias ls='ls --color'
 
 # Go workspace defaults (compatible with distro-provided Go installs)
 export GOPATH="${GOPATH:-$HOME/go}"
