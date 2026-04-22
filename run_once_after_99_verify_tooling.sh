@@ -108,8 +108,17 @@ else
   fail "uv is not installed"
 fi
 
+if [[ -n "${GOROOT:-}" && ! -d "$GOROOT" ]]; then
+  echo "[WARN] GOROOT is set to a missing directory ($GOROOT); unsetting for verification" >&2
+  unset GOROOT
+fi
+
 if command -v go >/dev/null 2>&1; then
-  ok "go $(go version)"
+  if go version >/dev/null 2>&1; then
+    ok "go $(go version)"
+  else
+    fail "go is installed but not runnable (check GOROOT/GOPATH)"
+  fi
 else
   fail "go is not installed"
 fi

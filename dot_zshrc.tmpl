@@ -130,16 +130,10 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 
 # Load a small set of Oh My Zsh libs commonly expected by OMZ plugins.
-zinit snippet OMZL::git.zsh
-zinit snippet OMZL::history.zsh
-zinit snippet OMZL::key-bindings.zsh
-zinit snippet OMZL::completion.zsh
-zinit snippet OMZL::directories.zsh
-zinit snippet OMZL::functions.zsh
-zinit snippet OMZL::misc.zsh
-zinit snippet OMZL::termsupport.zsh
-zinit snippet OMZL::theme-and-appearance.zsh
-zinit snippet OMZL::async_prompt.zsh
+for omz_lib in git history key-bindings completion directories functions misc termsupport theme-and-appearance async_prompt; do
+  zinit snippet "OMZL::${omz_lib}.zsh"
+done
+unset omz_lib
 
 # Keep existing Oh My Zsh theme.
 if [[ "$ZSH_THEME" == "random" ]]; then
@@ -203,6 +197,10 @@ fi
 alias ls='ls --color'
 
 # Go workspace defaults (compatible with distro-provided Go installs)
+# If GOROOT points to a removed/nonexistent location, unset it so system Go works.
+if [[ -n "${GOROOT:-}" && ! -d "$GOROOT" ]]; then
+  unset GOROOT
+fi
 export GOPATH="${GOPATH:-$HOME/go}"
 export GOBIN="${GOBIN:-$GOPATH/bin}"
 
