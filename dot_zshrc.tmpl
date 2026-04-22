@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=/home/aryaniyaps/.local/bin:$PATH
+export PATH="$HOME/.local/bin:$PATH"
 
 # nvm (Node Version Manager)
 export NVM_DIR="$HOME/.nvm"
@@ -139,6 +139,7 @@ zinit snippet OMZL::functions.zsh
 zinit snippet OMZL::misc.zsh
 zinit snippet OMZL::termsupport.zsh
 zinit snippet OMZL::theme-and-appearance.zsh
+zinit snippet OMZL::async_prompt.zsh
 
 # Keep existing Oh My Zsh theme.
 if [[ "$ZSH_THEME" == "random" ]]; then
@@ -155,7 +156,12 @@ unset _zsh_theme
 
 # Load the same Oh My Zsh plugins via Zinit.
 for plugin in "${plugins[@]}"; do
-  zinit snippet "OMZP::${plugin}"
+  if [[ "$plugin" == "docker" ]]; then
+    # OMZ docker plugin can emit a noisy legacy-completion copy error on some Docker versions.
+    zinit snippet "OMZP::${plugin}" 2>/dev/null
+  else
+    zinit snippet "OMZP::${plugin}"
+  fi
 done
 
 # Community plugins via Zinit.
