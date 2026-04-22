@@ -49,7 +49,7 @@ Installed by `run_once_before_00_install_packages.sh.tmpl`:
 - **dnf/fedora**: `git`, `zsh`, `curl`, `tmux`, `fzf`, `zoxide`, `golang`
 
 ### Installed tooling (bootstrap scripts)
-- **Oh My Zsh**
+- **zinit** (loads Oh My Zsh theme/plugins + community plugins)
 - **nvm**
 - **Node.js LTS** + **npm**
 - **pnpm** (via Corepack when available)
@@ -59,21 +59,19 @@ Installed by `run_once_before_00_install_packages.sh.tmpl`:
 - **GitHub CLI (`gh`)**
 
 ### Shell and editor environment
-- **ZSH** with **Oh My Zsh**
+- **ZSH** with **zinit**
 - Sets **zsh** as the default login shell during installation (interactive sessions)
 - Theme: **robbyrussell**
 - **tmux** configuration (`dot_tmux.conf`, mouse enabled)
 - PATH wiring for `~/.local/bin`, `nvm`, and Go workspace binaries
 
-### Oh My Zsh plugins enabled
+### Plugins enabled (loaded via zinit)
 - Version control: `git`
 - Cloud/infra: `docker`, `docker-compose`, `terraform`, `aws`, `gcloud`, `azure`
 - Language/tooling: `python`, `pip`, `node`, `npm`, `yarn`, `golang`, `rust`, `fzf`
 - Distro-specific (conditional): `archlinux` (Arch), `debian` (Debian), `ubuntu` (Ubuntu)
 - Productivity: `sudo`, `extract`, `z`, `history`, `command-not-found`, `vscode`
-- Community plugins (auto-synced): `zsh-autosuggestions`, `zsh-syntax-highlighting`
-- Completion source (auto-synced): `zsh-completions` (added to `fpath`, not loaded as an Oh My Zsh plugin)
-  - Rationale: avoids redundant `.zcompdump` cache generation from double `compinit` calls, improving shell startup time.
+- Community plugins: `zsh-autosuggestions`, `zsh-completions`, `zsh-syntax-highlighting`
 
 ### Language/runtime config included
 - **Go**: defaults for `$GOPATH` and `$GOBIN`, with `$GOBIN` added to `PATH`

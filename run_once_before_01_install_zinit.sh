@@ -38,29 +38,19 @@ set_default_shell_to_zsh() {
   fi
 }
 
-set_default_shell_to_zsh
+install_zinit() {
+  local zinit_home
+  zinit_home="${XDG_DATA_HOME:-$HOME/.local/share}/zinit/zinit.git"
 
-if [ ! -d "$HOME/.oh-my-zsh" ]; then
-  echo "Installing Oh My Zsh..."
-  RUNZSH=no CHSH=no KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-else
-  echo ".oh-my-zsh already found, skipping."
-fi
-
-# Ensure required Oh My Zsh community plugins are present.
-ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
-mkdir -p "$ZSH_CUSTOM/plugins"
-
-sync_plugin() {
-  local repo="$1"
-  local target="$2"
-  if [ ! -d "$target/.git" ]; then
-    git clone --depth 1 "$repo" "$target"
-  else
-    git -C "$target" pull --ff-only || true
+  if [ -f "$zinit_home/zinit.zsh" ]; then
+    echo "zinit already installed at $zinit_home, skipping."
+    return 0
   fi
+
+  echo "Installing zinit to $zinit_home..."
+  mkdir -p "$(dirname "$zinit_home")"
+  git clone https://github.com/zdharma-continuum/zinit.git "$zinit_home"
 }
 
-sync_plugin "https://github.com/zsh-users/zsh-autosuggestions" "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
-sync_plugin "https://github.com/zsh-users/zsh-completions" "$ZSH_CUSTOM/plugins/zsh-completions"
-sync_plugin "https://github.com/zsh-users/zsh-syntax-highlighting" "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
+set_default_shell_to_zsh
+install_zinit

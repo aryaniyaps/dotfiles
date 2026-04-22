@@ -5,20 +5,9 @@ if [ "$(uname -s)" != "Linux" ]; then
   exit 0
 fi
 
-# Ensure Oh My Zsh community plugins are installed/updated in custom plugins dir.
-ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
-mkdir -p "$ZSH_CUSTOM/plugins"
-
-sync_plugin() {
-  local repo="$1"
-  local target="$2"
-  if [ ! -d "$target/.git" ]; then
-    git clone --depth 1 "$repo" "$target"
-  else
-    git -C "$target" pull --ff-only || true
-  fi
-}
-
-sync_plugin "https://github.com/zsh-users/zsh-autosuggestions" "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
-sync_plugin "https://github.com/zsh-users/zsh-completions" "$ZSH_CUSTOM/plugins/zsh-completions"
-sync_plugin "https://github.com/zsh-users/zsh-syntax-highlighting" "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
+# Ensure zinit exists at the expected path used by .zshrc.
+ZINIT_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/zinit/zinit.git"
+if [ ! -f "$ZINIT_HOME/zinit.zsh" ]; then
+  mkdir -p "$(dirname "$ZINIT_HOME")"
+  git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
