@@ -1,16 +1,10 @@
 # Aryan Iyappan's dotfiles
 
-<table>
-  <tr>
-    <td width="68%" valign="top">
-      <picture>
-        <source media="(max-width: 768px)" srcset=".github/banner.png" />
-        <img src=".github/banner.png" alt="Dottler dotfiles banner" style="display:block; width:100%; height:auto;" />
-      </picture>
-    </td>
-    <td width="42%" valign="top">
+<p align="center">
+  <img src=".github/banner.png" alt="Dottler dotfiles banner"  height="360" />
+</p>
 
-### Quickstart
+## Quickstart
 
 Deploy the entire setup on a fresh Linux instance with one command:
 
@@ -19,10 +13,6 @@ sh -c "$(curl -fsLS get.chezmoi.io)" -- -b ~/.local/bin init --apply aryaniyaps
 ```
 
 Sit back and watch your environment get configured automatically!
-
-  </td>
-  </tr>
-</table>
 
 This is a fully automated development environment setup managed by [chezmoi](https://github.com/twpayne/chezmoi). It provides a complete shell configuration and tooling setup that can be deployed with a single command on any Linux system.
 
