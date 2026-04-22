@@ -1,13 +1,17 @@
 # Aryan Iyappan's dotfiles
 
-<p align="center">
-  <img src=".github/banner.png" alt="Dottler dotfiles banner" width="720" />
-</p>
-<p align="center"><em>Dottler guarding the dots ✨</em></p>
+<table>
+  <tr>
+    <td width="58%" valign="top">
+      <picture>
+        <source media="(max-width: 320px)" srcset=".github/banner.png" />
+        <img src=".github/banner.png" alt="Dottler dotfiles banner" style="display:block; width:72%; max-width:320px; height:auto;" />
+      </picture>
+      <p><sub><em>✨ Dottler guarding the dots</em></sub></p>
+    </td>
+    <td width="90%" valign="top">
 
-This is a fully automated development environment setup managed by [chezmoi](https://github.com/twpayne/chezmoi). It provides a complete shell configuration and tooling setup that can be deployed with a single command on any Linux system.
-
-## Quickstart
+### Quickstart
 
 Deploy the entire setup on a fresh Linux instance with one command:
 
@@ -16,6 +20,12 @@ sh -c "$(curl -fsLS get.chezmoi.io)" -- -b ~/.local/bin init --apply aryaniyaps
 ```
 
 Sit back and watch your environment get configured automatically!
+
+  </td>
+  </tr>
+</table>
+
+This is a fully automated development environment setup managed by [chezmoi](https://github.com/twpayne/chezmoi). It provides a complete shell configuration and tooling setup that can be deployed with a single command on any Linux system.
 
 ### Git identity prompt during `chezmoi init`
 
