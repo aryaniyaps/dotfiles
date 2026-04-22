@@ -7,6 +7,17 @@ This is a fully automated development environment setup managed by [chezmoi](htt
   <p><em>Dotfile wrangler extraordinaire! 🧠📁 Managing your configs like a psychic boss—no more config chaos!</em></p>
 </p>
 
+## Supported / Tested distros
+
+| Distro / family | Package manager path | Status |
+|---|---|---|
+| Ubuntu | `apt` | ✅ Tested |
+| Debian | `apt` | ✅ Tested |
+| Fedora | `dnf` | ✅ Tested |
+| Arch Linux | `pacman` | ✅ Tested |
+| RHEL family | `dnf` | 🟡 Supported (not yet tested) |
+| openSUSE / SLES | `zypper` | 🟡 Supported (not yet tested) |
+
 ## Quickstart
 
 Deploy the entire setup on a fresh Linux instance with one command:
