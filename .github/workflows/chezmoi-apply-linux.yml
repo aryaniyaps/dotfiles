@@ -1,4 +1,4 @@
-name: Validate chezmoi apply (Ubuntu/Debian/Fedora/Arch)
+name: Validate chezmoi apply
 
 on:
   push:

@@ -7,14 +7,16 @@ This is a fully automated development environment setup managed by [chezmoi](htt
   <p><em>Dotfile wrangler extraordinaire! 🧠📁 Managing your configs like a psychic boss—no more config chaos!</em></p>
 </p>
 
-## Supported / Tested distros
+## Supported distros
 
-| Distro / family | Package manager path | Status |
+| Distro / family | Package manager path | CI status |
 |---|---|---|
-| Ubuntu | `apt` | ✅ Tested |
-| Debian | `apt` | ✅ Tested |
-| Fedora | `dnf` | ✅ Tested |
-| Arch Linux | `pacman` | ✅ Tested |
+| Ubuntu | `apt` | [![ubuntu](https://img.shields.io/github/actions/workflow/status/aryaniyaps/dotfiles/chezmoi-apply-linux.yml?branch=main&event=push&job=ubuntu&label=ubuntu)](https://github.com/aryaniyaps/dotfiles/actions/workflows/chezmoi-apply-linux.yml) |
+| Debian | `apt` | [![debian](https://img.shields.io/github/actions/workflow/status/aryaniyaps/dotfiles/chezmoi-apply-linux.yml?branch=main&event=push&job=debian&label=debian)](https://github.com/aryaniyaps/dotfiles/actions/workflows/chezmoi-apply-linux.yml) |
+| Fedora | `dnf` | [![fedora](https://img.shields.io/github/actions/workflow/status/aryaniyaps/dotfiles/chezmoi-apply-linux.yml?branch=main&event=push&job=fedora&label=fedora)](https://github.com/aryaniyaps/dotfiles/actions/workflows/chezmoi-apply-linux.yml) |
+| Arch Linux | `pacman` | [![arch](https://img.shields.io/github/actions/workflow/status/aryaniyaps/dotfiles/chezmoi-apply-linux.yml?branch=main&event=push&job=arch&label=arch)](https://github.com/aryaniyaps/dotfiles/actions/workflows/chezmoi-apply-linux.yml) |
+
+> These badges are dynamic and show the latest status (pass/fail) of the relevant distro job in `chezmoi-apply-linux.yml` on `main`.
 
 ## Quickstart
 
