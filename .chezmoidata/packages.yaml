@@ -4,18 +4,22 @@ linux:
     - zsh
     - curl
     - tmux
+    - golang-go
   pacman:
     - git
     - zsh
     - curl
     - tmux
+    - go
   dnf:
     - git
     - zsh
     - curl
     - tmux
+    - golang
   zypper:
     - git
     - zsh
     - curl
     - tmux
+    - go

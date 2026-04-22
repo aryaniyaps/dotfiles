@@ -140,9 +140,11 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# Go workspace defaults (compatible with distro-provided Go installs)
+export GOPATH="${GOPATH:-$HOME/go}"
+export GOBIN="${GOBIN:-$GOPATH/bin}"
 
- export GOPATH=$HOME/go
-  export GOROOT=/usr/local/go
-  export GOBIN=$GOPATH/bin
-  export PATH=$PATH:$GOPATH
-  export PATH=$PATH:$GOROOT/bin
+# Add Go bin dir once so `go install` binaries are available.
+if [[ ":$PATH:" != *":$GOBIN:"* ]]; then
+  export PATH="$GOBIN:$PATH"
+fi

@@ -56,10 +56,46 @@ else
   fail "tmux is not installed"
 fi
 
+if command -v docker >/dev/null 2>&1; then
+  ok "docker $(docker --version)"
+else
+  fail "docker is not installed"
+fi
+
+if docker compose version >/dev/null 2>&1; then
+  ok "docker compose $(docker compose version --short 2>/dev/null || docker compose version)"
+elif command -v docker-compose >/dev/null 2>&1; then
+  ok "docker-compose $(docker-compose --version)"
+else
+  fail "docker compose is not installed"
+fi
+
 if command -v uv >/dev/null 2>&1; then
   ok "uv $(uv --version)"
 else
   fail "uv is not installed"
+fi
+
+if command -v go >/dev/null 2>&1; then
+  ok "go $(go version)"
+else
+  fail "go is not installed"
+fi
+
+if command -v go >/dev/null 2>&1; then
+  if go env GOPATH >/dev/null 2>&1 && go env GOROOT >/dev/null 2>&1; then
+    ok "go env works in non-interactive shell"
+  else
+    fail "go env failed in non-interactive shell"
+  fi
+
+  if command -v zsh >/dev/null 2>&1; then
+    if zsh -ic 'command -v go >/dev/null 2>&1 && go env GOPATH >/dev/null 2>&1 && go env GOBIN >/dev/null 2>&1 && gobin="$(go env GOBIN)" && [[ -n "$gobin" && ":$PATH:" == *":$gobin:"* ]]' >/dev/null 2>&1; then
+      ok "go env and GOBIN PATH wiring work in zsh"
+    else
+      fail "go env or GOBIN PATH wiring failed in zsh"
+    fi
+  fi
 fi
 
 if command -v uv >/dev/null 2>&1; then

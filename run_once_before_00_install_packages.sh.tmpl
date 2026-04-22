@@ -72,9 +72,29 @@ case "$manager" in
     ;;
 esac
 
+is_pkg_installed() {
+  local mgr="$1"
+  local pkg="$2"
+
+  case "$mgr" in
+    apt-get)
+      dpkg -s "$pkg" >/dev/null 2>&1
+      ;;
+    pacman)
+      pacman -Qi "$pkg" >/dev/null 2>&1
+      ;;
+    dnf|zypper)
+      rpm -q "$pkg" >/dev/null 2>&1
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
 missing=0
 for pkg in "${packages[@]}"; do
-  if ! command -v "$pkg" >/dev/null 2>&1; then
+  if ! is_pkg_installed "$manager" "$pkg"; then
     missing=1
     break
   fi
