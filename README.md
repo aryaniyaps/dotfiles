@@ -7,7 +7,6 @@
         <source media="(max-width: 768px)" srcset=".github/banner.png" />
         <img src=".github/banner.png" alt="Dottler dotfiles banner" style="display:block; width:100%; height:auto;" />
       </picture>
-      <p><sub><em>✨ Dottler guarding the dots</em></sub></p>
     </td>
     <td width="42%" valign="top">
 
