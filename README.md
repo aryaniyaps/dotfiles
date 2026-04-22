@@ -56,6 +56,6 @@ chezmoi update --init --apply
 
 ## Requirements
 
-- Linux system (tested on Ubuntu, Debian, Fedora, Arch, RHEL, CentOS, openSUSE)
+- Linux system (tested on Ubuntu, Debian, Fedora, Arch)
 - Internet connection for initial download
 - `curl` available in the base system
