@@ -68,7 +68,8 @@ Installed by `run_once_before_00_install_packages.sh.tmpl`:
 ### Oh My Zsh plugins enabled
 - Version control: `git`
 - Cloud/infra: `docker`, `docker-compose`, `terraform`, `aws`, `gcloud`, `azure`
-- Language/tooling: `python`, `pip`, `node`, `npm`, `yarn`, `golang`, `rust`
+- Language/tooling: `python`, `pip`, `node`, `npm`, `yarn`, `golang`, `rust`, `fzf`
+- Distro-specific (conditional): `archlinux` (Arch), `debian` (Debian), `ubuntu` (Ubuntu)
 - Productivity: `sudo`, `extract`, `z`, `history`, `command-not-found`, `vscode`
 - Community plugins (auto-synced): `zsh-autosuggestions`, `zsh-syntax-highlighting`
 - Completion source (auto-synced): `zsh-completions` (added to `fpath`, not loaded as an Oh My Zsh plugin)
