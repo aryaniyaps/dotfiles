@@ -6,6 +6,7 @@ linux:
     - tmux
     - fzf
     - zoxide
+    - xdg-utils
     - golang-go
   pacman:
     - git
@@ -14,6 +15,7 @@ linux:
     - tmux
     - fzf
     - zoxide
+    - xdg-utils
     - go
   dnf:
     - git
@@ -22,4 +24,5 @@ linux:
     - tmux
     - fzf
     - zoxide
+    - xdg-utils
     - golang

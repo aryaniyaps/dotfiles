@@ -68,6 +68,12 @@ else
   fail "zoxide is not installed"
 fi
 
+if command -v xdg-open >/dev/null 2>&1; then
+  ok "xdg-open is available (browser link opener)"
+else
+  fail "xdg-open is not installed (install xdg-utils)"
+fi
+
 if command -v zsh >/dev/null 2>&1; then
   zsh_path="$(command -v zsh)"
   login_shell=""
@@ -79,10 +85,10 @@ if command -v zsh >/dev/null 2>&1; then
     login_shell="${SHELL:-}"
   fi
 
-  if [[ "$login_shell" == "$zsh_path" ]]; then
+  if [[ "$login_shell" == */zsh && -x "$login_shell" ]]; then
     ok "default login shell is zsh ($login_shell)"
   else
-    echo "[WARN] default login shell is '$login_shell' (expected '$zsh_path')" >&2
+    echo "[WARN] default login shell is '$login_shell' (expected a zsh path, e.g. '$zsh_path')" >&2
   fi
 else
   fail "zsh is not installed"

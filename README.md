@@ -44,9 +44,9 @@ chezmoi update --init --apply
 ### Declarative base packages (per distro)
 Installed by `run_once_before_00_install_packages.sh.tmpl`:
 
-- **apt/debian/ubuntu**: `git`, `zsh`, `curl`, `tmux`, `fzf`, `zoxide`, `golang-go`
-- **pacman/arch**: `git`, `zsh`, `curl`, `tmux`, `fzf`, `zoxide`, `go`
-- **dnf/fedora**: `git`, `zsh`, `curl`, `tmux`, `fzf`, `zoxide`, `golang`
+- **apt/debian/ubuntu**: `git`, `zsh`, `curl`, `tmux`, `fzf`, `zoxide`, `xdg-utils`, `golang-go`
+- **pacman/arch**: `git`, `zsh`, `curl`, `tmux`, `fzf`, `zoxide`, `xdg-utils`, `go`
+- **dnf/fedora**: `git`, `zsh`, `curl`, `tmux`, `fzf`, `zoxide`, `xdg-utils`, `golang`
 
 ### Installed tooling (bootstrap scripts)
 - **zinit** (loads Oh My Zsh theme/plugins + community plugins)
@@ -57,10 +57,12 @@ Installed by `run_once_before_00_install_packages.sh.tmpl`:
 - **Python 3.14** (via `uv python install 3.14`)
 - **Docker Engine** + **Docker Compose** (`docker compose` plugin or `docker-compose` fallback)
 - **GitHub CLI (`gh`)**
+- **Browser link opener support** via `xdg-open` (`xdg-utils`)
 
 ### Shell and editor environment
 - **ZSH** with **zinit**
 - Sets **zsh** as the default login shell during installation (interactive sessions)
+- Handles `chsh` + `/etc/shells` mismatches gracefully (auto-adds detected zsh path when possible, otherwise falls back to a listed zsh path)
 - Theme: **robbyrussell**
 - **tmux** configuration (`dot_tmux.conf`, mouse enabled)
 - PATH wiring for `~/.local/bin`, `nvm`, and Go workspace binaries
@@ -81,7 +83,7 @@ Installed by `run_once_before_00_install_packages.sh.tmpl`:
 ### Verification included
 `run_once_after_99_verify_tooling.sh` checks:
 - `node`, `npm`, `pnpm`
-- `gh`, `tmux`, `fzf`
+- `gh`, `tmux`, `fzf`, `xdg-open` (`xdg-utils`)
 - `docker` + compose availability
 - `uv` + Python 3.14 availability via `uv`
 - `go` installation plus `go env` + zsh PATH/GOBIN integration
