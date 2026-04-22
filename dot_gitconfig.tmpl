@@ -1,0 +1,22 @@
+[user]
+    name = {{ or .gitName .chezmoi.username }}
+    email = {{ or .gitEmail (printf "%s@%s" .chezmoi.username .chezmoi.hostname) }}
+
+[init]
+    defaultBranch = main
+
+[pull]
+    rebase = false
+
+[fetch]
+    prune = true
+
+[core]
+    editor = vim
+
+[alias]
+    st = status -sb
+    co = checkout
+    br = branch
+    ci = commit
+    lg = log --oneline --graph --decorate --all

@@ -12,6 +12,16 @@ sh -c "$(curl -fsLS get.chezmoi.io)" -- -b ~/.local/bin init --apply aryaniyaps
 
 Sit back and watch your environment get configured automatically!
 
+### Git identity prompt during `chezmoi init`
+
+On first `chezmoi init`, chezmoi prompts for your Git name and email, validates them (non-empty name, email format), and stores them in your chezmoi config data. `~/.gitconfig` is then rendered automatically from that data.
+
+If you need to update those values later, run:
+
+```bash
+chezmoi update --init --apply
+```
+
 ## What's Included
 
 ### Shell Environment
@@ -28,7 +38,7 @@ Sit back and watch your environment get configured automatically!
 - **vscode** - VS Code aliases and workspace shortcuts
 
 ### Version Control & DevOps
-- **git** - Git integration with powerful aliases
+- **git** - Automatically configured via `~/.gitconfig` template
 - **docker** & **docker-compose** - Container management shortcuts
 - **terraform** - Infrastructure-as-code tool completions
 - **aws**, **gcloud**, **azure** - Cloud provider CLI support
@@ -46,6 +56,6 @@ Sit back and watch your environment get configured automatically!
 
 ## Requirements
 
-- Linux system (tested on Ubuntu, Debian, Fedora)
+- Linux system (tested on Ubuntu, Debian, Fedora, Arch, RHEL, CentOS, openSUSE)
 - Internet connection for initial download
 - `curl` available in the base system

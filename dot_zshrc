@@ -99,9 +99,9 @@ plugins=(
     command-not-found # Suggests package to install for missing commands
     vscode            # VS Code aliases and shortcuts
 
-    # Community Plugins (Must be last)
-    zsh-syntax-highlighting 
+    # Community Plugins
     zsh-autosuggestions
+    zsh-syntax-highlighting  # Must be last
 )
 
 source $ZSH/oh-my-zsh.sh

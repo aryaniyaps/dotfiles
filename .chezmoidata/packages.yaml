@@ -1,0 +1,17 @@
+linux:
+  apt-get:
+    - git
+    - zsh
+    - curl
+  pacman:
+    - git
+    - zsh
+    - curl
+  dnf:
+    - git
+    - zsh
+    - curl
+  zypper:
+    - git
+    - zsh
+    - curl

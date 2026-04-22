@@ -1,0 +1,63 @@
+name: Validate chezmoi apply on Linux distros
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  chezmoi-apply:
+    name: ${{ matrix.distro }}
+    runs-on: ubuntu-latest
+    container:
+      image: ${{ matrix.image }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - distro: ubuntu
+            image: ubuntu:24.04
+            bootstrap: apt-get update && apt-get install -y ca-certificates curl git zsh sudo
+          - distro: debian
+            image: debian:12
+            bootstrap: apt-get update && apt-get install -y ca-certificates curl git zsh sudo
+          - distro: fedora
+            image: fedora:41
+            bootstrap: dnf install -y ca-certificates curl git zsh sudo
+          - distro: arch
+            image: archlinux:latest
+            bootstrap: pacman -Sy --noconfirm ca-certificates curl git zsh sudo
+          - distro: rhel
+            image: registry.access.redhat.com/ubi9/ubi:latest
+            bootstrap: |
+              if command -v dnf >/dev/null 2>&1; then
+                dnf install -y ca-certificates curl git zsh sudo
+              else
+                microdnf install -y ca-certificates curl git zsh sudo
+                ln -sf "$(command -v microdnf)" /usr/bin/dnf
+              fi
+          - distro: centos
+            image: quay.io/centos/centos:stream9
+            bootstrap: dnf install -y ca-certificates curl git zsh sudo
+          - distro: opensuse
+            image: opensuse/leap:15.6
+            bootstrap: zypper --non-interactive refresh && zypper --non-interactive install -y ca-certificates curl git zsh sudo
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install distro prerequisites
+        run: ${{ matrix.bootstrap }}
+
+      - name: Install chezmoi
+        run: sh -c "$(curl -fsLS get.chezmoi.io)" -- -b /usr/local/bin
+
+      - name: Run chezmoi apply
+        env:
+          HOME: /tmp/chezmoi-home
+        run: |
+          mkdir -p "$HOME"
+          chezmoi init --apply --source "$GITHUB_WORKSPACE" \
+            --promptString gitName='CI Bot' \
+            --promptString gitEmail='ci@example.com'

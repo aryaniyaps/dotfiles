@@ -1,0 +1,102 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ "$(uname -s)" != "Linux" ]]; then
+  exit 0
+fi
+
+if [[ -r /etc/os-release ]]; then
+  # shellcheck disable=SC1091
+  source /etc/os-release
+else
+  echo "Cannot detect Linux distribution (/etc/os-release missing). Skipping package installation."
+  exit 0
+fi
+
+manager=""
+
+case "${ID:-}" in
+  ubuntu|debian)
+    manager="apt-get"
+    ;;
+  arch)
+    manager="pacman"
+    ;;
+  fedora|rhel|centos)
+    manager="dnf"
+    ;;
+  opensuse*|sles|sled)
+    manager="zypper"
+    ;;
+esac
+
+if [[ -z "$manager" && -n "${ID_LIKE:-}" ]]; then
+  for like in $ID_LIKE; do
+    case "$like" in
+      debian)
+        manager="apt-get"
+        break
+        ;;
+      arch)
+        manager="pacman"
+        break
+        ;;
+      fedora|rhel)
+        manager="dnf"
+        break
+        ;;
+      suse)
+        manager="zypper"
+        break
+        ;;
+    esac
+  done
+fi
+
+case "$manager" in
+  apt-get)
+    packages=({{ index .linux "apt-get" | join " " }})
+    ;;
+  pacman)
+    packages=({{ .linux.pacman | join " " }})
+    ;;
+  dnf)
+    packages=({{ .linux.dnf | join " " }})
+    ;;
+  zypper)
+    packages=({{ .linux.zypper | join " " }})
+    ;;
+  "")
+    echo "No declarative package manager mapping for distro '${ID:-unknown}'. Skipping."
+    exit 0
+    ;;
+esac
+
+missing=0
+for pkg in "${packages[@]}"; do
+  if ! command -v "$pkg" >/dev/null 2>&1; then
+    missing=1
+    break
+  fi
+done
+
+if [[ "$missing" -eq 0 ]]; then
+  echo "All declarative packages already installed."
+  exit 0
+fi
+
+case "$manager" in
+  apt-get)
+    sudo apt-get update -y
+    sudo apt-get install -y "${packages[@]}"
+    ;;
+  pacman)
+    sudo pacman -Sy --noconfirm --needed "${packages[@]}"
+    ;;
+  dnf)
+    sudo dnf install -y "${packages[@]}"
+    ;;
+  zypper)
+    sudo zypper --non-interactive install "${packages[@]}"
+    ;;
+esac

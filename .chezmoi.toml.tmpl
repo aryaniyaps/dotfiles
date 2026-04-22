@@ -1,0 +1,19 @@
+{{- $gitName := trim (promptStringOnce . "gitName" "Git author name") -}}
+{{- if eq $gitName "" -}}
+{{- $gitName = trim (promptString "Git author name (required)") -}}
+{{- end -}}
+{{- if eq $gitName "" -}}
+{{- fail "Git author name cannot be empty. Re-run: chezmoi update --init --apply" -}}
+{{- end -}}
+
+{{- $gitEmail := trim (promptStringOnce . "gitEmail" "Git author email") -}}
+{{- if not (regexMatch "^[^@[:space:]]+@[^@[:space:]]+\\.[^@[:space:]]+$" $gitEmail) -}}
+{{- $gitEmail = trim (promptString "Git author email (e.g. you@example.com)") -}}
+{{- end -}}
+{{- if not (regexMatch "^[^@[:space:]]+@[^@[:space:]]+\\.[^@[:space:]]+$" $gitEmail) -}}
+{{- fail (printf "Invalid Git author email %q. Re-run: chezmoi update --init --apply" $gitEmail) -}}
+{{- end -}}
+
+[data]
+    gitName = {{ $gitName | quote }}
+    gitEmail = {{ $gitEmail | quote }}
