@@ -3,15 +3,19 @@ linux:
     - git
     - zsh
     - curl
+    - tmux
   pacman:
     - git
     - zsh
     - curl
+    - tmux
   dnf:
     - git
     - zsh
     - curl
+    - tmux
   zypper:
     - git
     - zsh
     - curl
+    - tmux

@@ -26,6 +26,7 @@ chezmoi update --init --apply
 
 ### Shell Environment
 - **ZSH** - Zsh shell with Oh My Zsh framework
+- **tmux** - Terminal multiplexer for persistent and split-pane workflows (mouse enabled by default)
 - **Theme** - robbyrussell theme for a clean, minimal prompt
 - **Custom PATH** - Optimized for local binaries and development tools
 
@@ -39,13 +40,17 @@ chezmoi update --init --apply
 
 ### Version Control & DevOps
 - **git** - Automatically configured via `~/.gitconfig` template
+- **gh** - GitHub CLI (installed via upstream release tarball for broad distro compatibility)
 - **docker** & **docker-compose** - Container management shortcuts
 - **terraform** - Infrastructure-as-code tool completions
 - **aws**, **gcloud**, **azure** - Cloud provider CLI support
 
 ### Programming Languages & Package Managers
-- **python** & **pip** - Python development tools
-- **node**, **npm**, **yarn** - JavaScript/Node.js ecosystem
+- **Python 3.14** (via `uv`) & **pip** - Python development tools
+- **Node.js LTS** & **npm** - JavaScript runtime and package management
+- **pnpm** - Fast, disk-efficient package manager
+- **uv** - Ultra-fast Python package/project manager and Python installer
+- **yarn** - JavaScript package manager
 - **golang** - Go language with proper PATH setup
 - **rust** - Rust toolchain integration
 
