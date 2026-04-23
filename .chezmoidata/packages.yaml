@@ -9,6 +9,7 @@ linux:
     - xdg-utils
     - golang-go
   pacman:
+    - sudo
     - git
     - zsh
     - curl

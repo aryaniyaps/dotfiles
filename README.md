@@ -18,6 +18,12 @@ This is a fully automated development environment setup managed by [chezmoi](htt
 
 > These badges are dynamic and show the latest status (pass/fail) of the relevant distro job in `chezmoi-apply-linux.yml` on `main`.
 
+## Requirements
+
+- Linux system (tested on the above mentioned distros)
+- Internet connection for initial download
+- `curl` available in the base system
+
 ## Quickstart
 
 Deploy the entire setup on a fresh Linux instance with one command:
@@ -45,7 +51,7 @@ chezmoi update --init --apply
 Installed by `run_once_before_00_install_packages.sh.tmpl`:
 
 - **apt/debian/ubuntu**: `git`, `zsh`, `curl`, `tmux`, `fzf`, `zoxide`, `xdg-utils`, `golang-go`
-- **pacman/arch**: `git`, `zsh`, `curl`, `tmux`, `fzf`, `zoxide`, `xdg-utils`, `go`
+- **pacman/arch**: `sudo`, `git`, `zsh`, `curl`, `tmux`, `fzf`, `zoxide`, `xdg-utils`, `go`
 - **dnf/fedora**: `git`, `zsh`, `curl`, `tmux`, `fzf`, `zoxide`, `xdg-utils`, `golang`
 
 ### Installed tooling (bootstrap scripts)
@@ -55,6 +61,7 @@ Installed by `run_once_before_00_install_packages.sh.tmpl`:
 - **pnpm** (via Corepack when available)
 - **uv**
 - **Python 3.14** (via `uv python install 3.14`)
+- **rustup** (installed via official bootstrap script)
 - **Docker Engine** + **Docker Compose** (`docker compose` plugin or `docker-compose` fallback)
 - **GitHub CLI (`gh`)**
 - **Browser link opener support** via `xdg-open` (`xdg-utils`)
@@ -86,6 +93,7 @@ Installed by `run_once_before_00_install_packages.sh.tmpl`:
 - `gh`, `tmux`, `fzf`, `xdg-open` (`xdg-utils`)
 - `docker` + compose availability
 - `uv` + Python 3.14 availability via `uv`
+- `rustup`
 - `go` installation plus `go env` + zsh PATH/GOBIN integration
 
 ## Script execution model (chezmoi)
@@ -97,9 +105,3 @@ This repo follows chezmoi script phase attributes for deterministic bootstrap:
 - `run_once_after_*` - one-time post-setup validation/check tasks
 
 Scripts are executed alphabetically within each phase (numbered prefixes are intentional).
-
-## Requirements
-
-- Linux system (tested on Ubuntu, Debian, Fedora, Arch)
-- Internet connection for initial download
-- `curl` available in the base system

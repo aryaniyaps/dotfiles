@@ -114,6 +114,14 @@ else
   fail "uv is not installed"
 fi
 
+export PATH="$HOME/.cargo/bin:$PATH"
+
+if command -v rustup >/dev/null 2>&1; then
+  ok "rustup $(rustup --version | head -n1)"
+else
+  fail "rustup is not installed"
+fi
+
 if [[ -n "${GOROOT:-}" && ! -d "$GOROOT" ]]; then
   echo "[WARN] GOROOT is set to a missing directory ($GOROOT); unsetting for verification" >&2
   unset GOROOT

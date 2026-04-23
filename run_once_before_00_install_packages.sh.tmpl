@@ -62,6 +62,17 @@ case "$manager" in
     ;;
 esac
 
+as_root() {
+  if [[ "${EUID:-$(id -u)}" -eq 0 ]]; then
+    "$@"
+  elif command -v sudo >/dev/null 2>&1; then
+    sudo "$@"
+  else
+    echo "Need root privileges for package installation, but sudo is not installed and user is not root." >&2
+    exit 1
+  fi
+}
+
 is_pkg_installed() {
   local mgr="$1"
   local pkg="$2"
@@ -97,13 +108,13 @@ fi
 
 case "$manager" in
   apt-get)
-    sudo apt-get update -y
-    sudo apt-get install -y "${packages[@]}"
+    as_root apt-get update -y
+    as_root apt-get install -y "${packages[@]}"
     ;;
   pacman)
-    sudo pacman -Sy --noconfirm --needed "${packages[@]}"
+    as_root pacman -Sy --noconfirm --needed "${packages[@]}"
     ;;
   dnf)
-    sudo dnf install -y "${packages[@]}"
+    as_root dnf install -y "${packages[@]}"
     ;;
 esac
